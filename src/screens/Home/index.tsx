@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import {
   View,
   Text,
+  Image,
   Switch,
   ScrollView,
   TouchableOpacity,
@@ -19,6 +20,12 @@ import PointCard, { PointCardStatus } from '../../components/PointCard';
 import FloatingActionButton from '../../components/FloatingActionButton';
 import FloatingActionMenu from '../../components/FloatingActionMenu';
 import { styles } from './style';
+
+const logoImg = require('../../images/logos/wayremote-logo.png');
+const tabPontosImg = require('../../images/icons/pontos-icon-tab.png');
+const tabEquipesImg = require('../../images/icons/equipes-icon-tab.png');
+const tabCampanhasImg = require('../../images/icons/campanha-icon-tab.png');
+const tabAcoesImg = require('../../images/icons/acoes-icon-tab.png');
 
 // ─── MOCK: remove or set to false to disable ─────────────
 const USE_MOCK = true;
@@ -151,10 +158,10 @@ const CATEGORIES = [
 // ─── END MOCK ──────────────────────────────────────────
 
 const TABS = [
-  { id: 'pontos', label: 'PONTOS', icon: 'location' as const, color: '#a52a2a' },
-  { id: 'equipes', label: 'EQUIPES', icon: 'people' as const, color: '#2d5016' },
-  { id: 'campanhas', label: 'CAMPANHAS', icon: 'flag' as const, color: '#4a2d7d' },
-  { id: 'acoes', label: 'AÇÕES', icon: 'flash' as const, color: '#d4a500' },
+  { id: 'pontos', label: 'PONTOS', img: tabPontosImg, color: '#a52a2a' },
+  { id: 'equipes', label: 'EQUIPES', img: tabEquipesImg, color: '#2d5016' },
+  { id: 'campanhas', label: 'CAMPANHAS', img: tabCampanhasImg, color: '#4a2d7d' },
+  { id: 'acoes', label: 'AÇÕES', img: tabAcoesImg, color: '#d4a500' },
 ];
 
 const RADIUS_OPTIONS = [1, 3, 5, 10, 20, 50];
@@ -315,11 +322,12 @@ export default function HomeScreen() {
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.headerLeft}>
-          <MaterialCommunityIcons name="map-marker-circle" size={28} color={colors.primary} />
-          <View style={styles.headerText}>
-            <Text style={styles.logo}>WAYREMOTE</Text>
-            <Text style={styles.devMode}>DEV MODE</Text>
-          </View>
+          <Image
+            source={logoImg}
+            style={styles.logoImage}
+            resizeMode="contain"
+            alt="WayRemote"
+          />
         </View>
         <TouchableOpacity style={styles.menuBtn}>
           <Ionicons name="menu" size={24} color={colors.text} />
@@ -328,19 +336,34 @@ export default function HomeScreen() {
 
       {/* Tabs */}
       <View style={styles.tabsContainer}>
-        {TABS.map((tab) => (
-          <TouchableOpacity
-            key={tab.id}
-            style={[
-              styles.tab,
-              activeTab === tab.id && [styles.tabActive, { borderBottomColor: tab.color }],
-            ]}
-            onPress={() => setActiveTab(tab.id)}
-          >
-            <Ionicons name={tab.icon} size={20} color={tab.color} />
-            <Text style={[styles.tabLabel, { color: tab.color }]}>{tab.label}</Text>
-          </TouchableOpacity>
-        ))}
+        {TABS.map((tab, index) => {
+          const isActive = activeTab === tab.id;
+          return (
+            <React.Fragment key={tab.id}>
+              {index > 0 && <View style={styles.tabDivider} />}
+              <TouchableOpacity
+                style={styles.tab}
+                onPress={() => setActiveTab(tab.id)}
+              >
+                <Image
+                  source={tab.img}
+                  style={[styles.tabIcon, !isActive && styles.tabIconInactive]}
+                  resizeMode="contain"
+                  alt={tab.label}
+                />
+                <Text
+                  style={[
+                    styles.tabLabel,
+                    isActive ? { color: tab.color } : styles.tabLabelInactive,
+                  ]}
+                >
+                  {tab.label}
+                </Text>
+                {isActive && <View style={[styles.tabIndicator, { backgroundColor: tab.color }]} />}
+              </TouchableOpacity>
+            </React.Fragment>
+          );
+        })}
       </View>
 
       {/* Map */}
@@ -549,8 +572,8 @@ export default function HomeScreen() {
                     }}
                     activeOpacity={0.7}
                   >
-                    <Ionicons
-                      name={cat.icon as keyof typeof Ionicons.glyphMap}
+                    <MaterialCommunityIcons
+                      name={cat.icon as keyof typeof MaterialCommunityIcons.glyphMap}
                       size={22}
                       color={isSelected ? colors.white : cat.color}
                     />

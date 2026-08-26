@@ -8,11 +8,16 @@ import ChatScreen from '../screens/Chat';
 import { Routes } from './routes';
 import { colors } from '../theme/colors';
 
+const inicioImg = require('../images/icons/inicio-icon.png');
+const membrosImg = require('../images/icons/membro-icon.png');
+const gruposImg = require('../images/icons/grupos-icon.png');
+const chatImg = require('../images/icons/chat-icon.png');
+
 const bottomTabs = [
-  { key: Routes.HOME, label: 'Inicio', icon: 'home' as const },
-  { key: Routes.MEMBROS, label: 'Membros', icon: 'people' as const },
-  { key: Routes.GRUPOS, label: 'Grupos', icon: 'people-circle' as const },
-  { key: Routes.CHAT, label: 'Chat', icon: 'chatbubbles' as const },
+  { key: Routes.HOME, label: 'Inicio', imageSource: inicioImg },
+  { key: Routes.MEMBROS, label: 'Membros', imageSource: membrosImg },
+  { key: Routes.GRUPOS, label: 'Grupos', imageSource: gruposImg },
+  { key: Routes.CHAT, label: 'Chat', imageSource: chatImg },
 ];
 
 export default function BottomNavigator() {

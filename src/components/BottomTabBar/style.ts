@@ -16,13 +16,24 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 2,
   },
+  tabImage: {
+    width: 40,
+    height: 40,
+  },
+  tabImageActive: {
+    tintColor: '#176B43',
+  },
+  tabImageInactive: {
+    opacity: 0.4,
+  },
   label: {
-    fontSize: 10,
+    fontSize: 11,
     fontWeight: '600',
     textTransform: 'uppercase',
     color: colors.textSecondary,
   },
   activeLabel: {
     color: colors.primary,
+    fontWeight: '700',
   },
 });

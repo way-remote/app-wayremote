@@ -29,27 +29,21 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
   },
-  headerLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.sm,
-  },
-  headerText: {
-    flexDirection: 'column',
-  },
-  logo: {
-    fontSize: 16,
-    ...mono,
-    color: colors.text,
-  },
-  devMode: {
-    fontSize: 10,
-    ...mono,
-    color: colors.primary,
+ headerLeft: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'flex-start',
+  flex: 1,
+ },
+
+  logoImage: {
+    width: 180,
+    height: 70,
+   
   },
   menuBtn: {
-    width: 40,
-    height: 40,
+    width: 45,
+    height: 45,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: radius.sm,
@@ -59,6 +53,7 @@ export const styles = StyleSheet.create({
   // ─── Tabs ────────────────────────────────────────
   tabsContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: colors.background,
     borderBottomWidth: 2,
     borderBottomColor: colors.border,
@@ -68,18 +63,36 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.sm,
-    gap: spacing.xs,
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.xs,
+    gap: 2,
   },
-  tabActive: {
-    borderBottomWidth: 3,
-    borderBottomColor: colors.primary,
+  tabIcon: {
+    width: 45,
+    height: 30,
+  },
+  tabIconInactive: {
+    opacity: 0.65,
+  },
+  tabDivider: {
+    width: 1,
+    height: 32,
+    backgroundColor: colors.border,
+    opacity: 0.5,
   },
   tabLabel: {
     fontSize: 10,
     ...mono,
+  },
+  tabLabelInactive: {
     color: colors.textSecondary,
+    opacity: 0.65,
+  },
+  tabIndicator: {
+    width: 24,
+    height: 3,
+    borderRadius: 1.5,
+    marginTop: 2,
   },
 
   // ─── Map ─────────────────────────────────────────
